@@ -1,0 +1,264 @@
+<!doctype html>
+<html >
+
+    <head>
+        <script>
+                    function playPause() { 
+            var music = document.getElementById('music2'); 
+            var music_btn = document.getElementById('music_btn2'); 
+            if (music.paused){ 
+                music.play(); 
+                music_btn.src = 'images/start.png'; 
+            } 
+            else{ 
+                music.pause(); 
+                music_btn.src = 'images/end.jpg.webp';  
+            } 
+        } 
+        </script>
+    <meta name="author" content="mogu">
+    <style>
+         .d1{
+            position: absolute;
+            top:0px;
+            right:0px ;
+         }
+         .d2{
+            position: absolute;
+            top: 140px;
+            right:300px;
+         }
+         .d3{
+            position: relative;
+            left:70px;
+         }
+        .red1{color: red}
+        .marquee {  
+            overflow: hidden;  
+            white-space: nowrap;  
+            width: 40%;  
+            box-sizing: border-box;  
+        }  
+        .marquee-content {  
+            display: inline-block;  
+            animation: marquee 10s linear infinite;  
+            font-size: 24px;  
+            padding-left: 100%;  
+        }
+        @keyframes marquee {  
+            from {  
+                transform: translate(0, 0);  
+            }  
+            to {  
+                transform: translate(-100%, 0);  
+            }  
+        }  
+    </style>
+    <style type="text/css">
+        body{
+            background: url("images/楪祈.png")no-repeat center center fixed;
+            -webkit-background-size: cover;
+                -o-background-size: cover;                
+                background-size: cover;
+    
+        }
+    </style>
+    </head>
+    <body>
+
+<span class="js-cursor-container"></span>  <!-- 鼠标拖尾特效 -->
+<script>
+  (function fairyDustCursor() {
+ 
+    var possibleColors = ["#D61C59", "#E7D84B", "#1B8798"]
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+    var cursor = { x: width / 2, y: width / 2 };
+    var particles = [];
+ 
+    function init() {
+      bindEvents();
+      loop();
+    }
+ 
+    // Bind events that are needed
+    function bindEvents() {
+      document.addEventListener('mousemove', onMouseMove);
+      window.addEventListener('resize', onWindowResize);
+    }
+ 
+    function onWindowResize(e) {
+      width = window.innerWidth;
+      height = window.innerHeight;
+    }
+ 
+    function onMouseMove(e) {
+      cursor.x = e.clientX;
+      cursor.y = e.clientY;
+ 
+      addParticle(cursor.x, cursor.y, possibleColors[Math.floor(Math.random() * possibleColors.length)]);
+    }
+ 
+    function addParticle(x, y, color) {
+      var particle = new Particle();
+      particle.init(x, y, color);
+      particles.push(particle);
+    }
+ 
+    function updateParticles() {
+ 
+      // Updated
+      for (var i = 0; i < particles.length; i++) {
+        particles[i].update();
+      }
+ 
+      // Remove dead particles
+      for (var i = particles.length - 1; i >= 0; i--) {
+        if (particles[i].lifeSpan < 0) {
+          particles[i].die();
+          particles.splice(i, 1);
+        }
+      }
+ 
+    }
+ 
+    function loop() {
+      requestAnimationFrame(loop);
+      updateParticles();
+    }
+ 
+    /**
+     * Particles
+     */
+    function Particle() {
+ 
+      this.character = "*";
+      this.lifeSpan = 120; //ms
+      this.initialStyles = {
+        "position": "fixed",
+        "display": "inline-block",
+        "top": "0px",
+        "left": "0px",
+        "pointerEvents": "none",
+        "touch-action": "none",
+        "z-index": "10000000",
+        "fontSize": "25px",
+        "will-change": "transform"
+      };
+ 
+      // Init, and set properties
+      this.init = function (x, y, color) {
+ 
+        this.velocity = {
+          x: (Math.random() < 0.5 ? -1 : 1) * (Math.random() / 2),
+          y: 1
+        };
+ 
+        this.position = { x: x + 10, y: y + 10 };
+        this.initialStyles.color = color;
+ 
+        this.element = document.createElement('span');
+        this.element.innerHTML = this.character;
+        applyProperties(this.element, this.initialStyles);
+        this.update();
+ 
+        document.querySelector('.js-cursor-container').appendChild(this.element);
+      };
+ 
+      this.update = function () {
+        this.position.x += this.velocity.x;
+        this.position.y += this.velocity.y;
+        this.lifeSpan--;
+ 
+        this.element.style.transform = "translate3d(" + this.position.x + "px," + this.position.y + "px, 0) scale(" + (this.lifeSpan / 120) + ")";
+      }
+ 
+      this.die = function () {
+        this.element.parentNode.removeChild(this.element);
+      }
+ 
+    }
+ 
+    /**
+     * Utils
+     */
+    // Applies css `properties` to an element.
+    function applyProperties(target, properties) {
+      for (var key in properties) {
+        target.style[key] = properties[key];
+      }
+    }
+ 
+    if (!('ontouchstart' in window || navigator.msMaxTouchPoints)) init();
+  })();
+</script>
+        <audio id="music2" src="audio/EGOIST - All Alone With You.mp3"  loop="loop" autoplay="true"></audio> 
+        <div class="d1"><a href="javascript:playPause();"><img src="images/start.png" width="100" height="100" id="music_btn2"></a>
+        <p style="font-size: large;color: rgb(0, 255, 60);">暂停点击上面</p><br>
+        </div>
+        <header role="banner">
+            <h1 class="site-title" style="color: rgb(255, 0, 0);" >Welcome to my website!have a good day!</h1>
+            <table border="1" class="d2" width="400px" height="350px">
+                <caption><h2 style="color: skyblue;">不能错过的超级网站！</h2></caption>
+                <thead>
+                    <tr>
+                        <th>网站</th><th>链接</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="color: rgb(0, 255, 255);text-indent: 20px;" title="想要了是吧？">galgame</td><td style="text-indent: 20px;"><a href="https://www.hikarinagi.com/" target="_blank" ><P style="color: rgb(0, 255, 255);">https://www.hikarinagi.com/</P></a></td>
+                    </tr>
+                    <tr>
+                        <td style="color:  rgb(0, 255, 255);text-indent: 17px;" title="不可以瑟瑟!">animation</td><td style="text-indent: 20px;"><a href="http://www.yhdmw4.com/" target="_blank"><P style="color: rgb(0, 255, 255);">http://www.yhdmw4.com/</P></a></td>
+                    </tr>
+                    <tr>
+                        <td style="color:  rgb(0, 255, 255);text-indent: 20px;" title="父母不在家，深夜打洛谷~激情~刺激~体验">coding</td><td style="text-indent: 20px;"><a href="https://www.luogu.com.cn/" target="_blank"><P style="color: rgb(0, 255, 255);">https://www.luogu.com.cn/</P></a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="marquee">
+                <div class="marquee-content" style="color: aqua;">you'll never walk alone &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    I will stay with you</div>
+            </div><br><br>
+            <figure>
+                <img srcset="images/home.jpg.jpg 4x,images/1024.jpg 3x,images/800.jpg 2x,images/600.jpg 1x"src="images/home-origin.jpg.jpg" alt="my avatar" title="希望你的眼中能发现更多温柔"/>
+                <figcaption style="text-indent: 60px;"><font size="5">grey raven punishing</font></figcaption>
+            </figure>
+            <nav role="main"style="text-indent: 60px;">
+                <ul>
+                    <li><a href="点击下载千恋万花.html" title="让我们开始吧！" class="red1">进入主页</a></li>
+                    <li><a href="about-me.html" title="超市你喵~"class="red1">about me</a></li>
+                    <li><a href="contact.html" title="想联系我？喵~"class="red1">contact me</a></li>
+                </ul>
+            </nav>
+        </header>
+        <div class="wrapper">
+            <main>
+                <article>
+                    <header>
+                        <h2>为什么选择卡拉彼丘？</h2>
+                        <p style="color: rgb(0, 255, 200) ;">《卡拉彼丘》是一款由Day1工作室开发的第三人称射击游戏 [1] [6]，该作于2023年1月11日至2023年1月18日进行“玻色1.0”测试 [2]，2023年6月16日至2023年7月18日进行“超弦”测试 [3]，2023年8月3日不删档游戏上线 [4]。2024年2月1日，《卡拉彼丘》客户端正式开启公测。 [17]
+                            游戏中玩家将扮演引航者，在卡丘世界中揭露不同阵营各自所持的理念，做出选择。 [1] [6]
+                            2024年11月22日，该游戏正式发布，同步上线美国 、日本、韩国、欧洲、东南亚、南美和澳大利亚等地区。 [19]截至2024年11月22日上午10点，仅上线2小时的《卡拉彼丘》(Strinova)，位居Steam平台“新品榜第一”和“热门免费游戏”榜首。 [20]</p>
+                            <footer>
+                                <p>2023年8月3日（PC端） 科幻</p>
+                            </footer>
+                    </header>
+                </article>
+            </main>
+            <aside>
+                <h3>Related articles</h3>
+                <ul>
+                    <li><a href="https://baike.baidu.com/item/%E5%8D%A1%E6%8B%89%E5%BD%BC%E4%B8%98/61904963" target="_blank"class="red1">卡拉彼丘似了喵</a></li>
+                </ul>
+
+            </aside>
+        </div>
+        <footer>
+            <p class="red1">Copyright [kristina1Q]</p>
+        </footer>
+    </body>
+
+
+</html>
